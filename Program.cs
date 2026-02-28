@@ -2,23 +2,29 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            string sched;
-            string subject;
+            string[] subjects = new string[0];
 
-            Console.WriteLine("Subject and Scheduling");
-            Console.WriteLine(" ");
+            Console.WriteLine("Enter subjects (type 'done' if youre finish inputing the subjects):");
 
-            var subjects = new string[4];
-            subjects[0] = "OOP";
-            subjects[1] = "Info Management";
-            subjects[2] = "Network Administration";
-            subjects[3] = "Integrative Programming";
-            subjects[4] = "Free Elective";
+            while (true)
+            {
+                Console.Write("> ");
+                string input = Console.ReadLine();
 
-            Console.WriteLine("Enter the time: ");
-            string sched = Console.ReadLine();
+                if (input.ToLower() == "done")
+                    break;
+                //Turo ni sir well.. yubg array.resize is magdedepende yung size nang array sa dami nang input nang user
+                Array.Resize(ref subjects, subjects.Length + 1);
+                subjects[subjects.Length - 1] = input;
+            }
+            //gagamitin mo yung foreach each para yung loop konis naka depende sa kada input nang user...
+            Console.WriteLine("\nSubjects:");
+            foreach (var subject in subjects)
+            {
+                Console.WriteLine(subject);
+            }
         }
     }
 }
