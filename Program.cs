@@ -32,7 +32,7 @@
     static void InputSubjects()
     {
         string[] subjects = new string[0];
-        Console.WriteLine("Enter subjects (type 'done' if you're finish inputing the subjects):");
+        Console.WriteLine("Enter subjects (type 'exit' if you're finish inputing the subjects):");
         while (true)
         {
             Console.Write("• ");
