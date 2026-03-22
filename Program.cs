@@ -8,7 +8,6 @@
         Console.WriteLine("1. Input Subjects");
         Console.WriteLine("2. Input Schedule");
         Console.WriteLine("3. Exit");
-        Console.WriteLine(" ");
         Console.Write("Enter your choice: ");
         choice = Convert.ToInt32(Console.ReadLine());
 
@@ -32,12 +31,12 @@
     static void InputSubjects()
     {
         string[] subjects = new string[0];
-        Console.WriteLine("Enter subjects (type 'exit' if you're finish inputing the subjects):");
+        Console.WriteLine("Enter subjects (type 'done' if you're finish inputing the subjects):");
         while (true)
         {
             Console.Write("• ");
             string input = Console.ReadLine();
-            if (input.ToLower() == "exit") break;
+            if (input.ToLower() == "done") break;
             Array.Resize(ref subjects, subjects.Length + 1);
             subjects[subjects.Length - 1] = input;
         }
@@ -51,15 +50,19 @@
 
     static void InputSchedule()
     {
-        Console.Write("Enter day (Example: Monday): ");
-        string day = Console.ReadLine();
+        while (true)
+        {
+            Console.Write("Enter day (Example: Monday), or type 'exit' to finish: ");
+            string day = Console.ReadLine();
+            if (day.ToLower() == "exit") break;
 
-        Console.Write($"Enter start time for {day} (Example: 7): ");
-        int startTime = Convert.ToInt32(Console.ReadLine());
+            Console.Write($"Enter start time for {day} (Example: 7): ");
+            int startTime = Convert.ToInt32(Console.ReadLine());
 
-        Console.Write($"Enter end time for {day} (Example: 12): ");
-        int endTime = Convert.ToInt32(Console.ReadLine());
+            Console.Write($"Enter end time for {day} (Example: 12): ");
+            int endTime = Convert.ToInt32(Console.ReadLine());
 
-        Console.WriteLine($"\nSchedule for {day}: {startTime}:00 - {endTime}:00");
+            Console.WriteLine($"\nSchedule for {day}: {startTime}:00 - {endTime}:00\n");
+        }
     }
     }
