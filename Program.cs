@@ -8,9 +8,11 @@
         Console.WriteLine("1. Input Subjects");
         Console.WriteLine("2. Input Schedule");
         Console.WriteLine("3. Exit");
+        Console.WriteLine(" ");
         Console.Write("Enter your choice: ");
         choice = Convert.ToInt32(Console.ReadLine());
-
+        Console.WriteLine(" ");
+            
         switch (choice)
         {
             case 1:
