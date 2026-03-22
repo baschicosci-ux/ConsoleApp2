@@ -37,7 +37,7 @@
         {
             Console.Write("• ");
             string input = Console.ReadLine();
-            if (input.ToLower() == "done") break;
+            if (input.ToLower() == "exit") break;
             Array.Resize(ref subjects, subjects.Length + 1);
             subjects[subjects.Length - 1] = input;
         }
