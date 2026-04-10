@@ -1,70 +1,92 @@
-﻿namespace ConsoleApp2
+﻿
+using System;
+using subjectSchedule;
+using subSchedDL;
+
+namespace ConsoleApp2
 {
+
     internal class Program
     {
-        static void Main()
-    {
-        int choice;
-        Console.WriteLine("1. Input Subjects");
-        Console.WriteLine("2. Input Schedule");
-        Console.WriteLine("3. Exit");
-        Console.WriteLine(" ");
-        Console.Write("Enter your choice: ");
-        choice = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine(" ");
-            
-        switch (choice)
-        {
-            case 1:
-                InputSubjects();
-                break;
-            case 2:
-                InputSchedule();
-                break;
-            case 3:
-                Environment.Exit(0);
-                break;
-            default:
-                Console.WriteLine("Invalid choice");
-                break;
-        }
-    }
+        static SubjectSchedule[] schedules = new SubjectSchedule[15];
+        static int scheduleCount = 0;
 
-    static void InputSubjects()
-    {
-        string[] subjects = new string[0];
-        Console.WriteLine("Enter subjects (type 'done' if you're finish inputing the subjects):");
-        while (true)
+        static void Main(string[] args)
         {
-            Console.Write("• ");
-            string input = Console.ReadLine();
-            if (input.ToLower() == "done") break;
-            Array.Resize(ref subjects, subjects.Length + 1);
-            subjects[subjects.Length - 1] = input;
+            Console.WriteLine("SUBJECT AND SCHEDULING MANAGEMENT:\n");
+
+            while (true)
+            {
+                Console.WriteLine("OPTIONS:");
+                Console.WriteLine("1. Input");
+                Console.WriteLine("2. Show Inputs");
+                Console.WriteLine("3. Exit\n");
+
+                Console.WriteLine("Choose an option: ");
+                int option = Convert.ToInt32(Console.ReadLine());
+
+                switch (option)
+                {
+                    case 1:
+                        inputSchedules();
+                        break;
+
+                    case 2:
+                        showSchedules();
+                        break;
+
+                    case 3:
+                        return;
+
+                    default:
+                        Console.WriteLine("Invalid option. Please choose again...");
+                        break;
+                }
+            }
         }
 
-        Console.WriteLine("\nSubjects:");
-        foreach (var subject in subjects)
+        static void inputSchedules()
         {
-            Console.WriteLine(subject);
-        }
-    }
+            if (scheduleCount >= schedules.Length)
+            {
+                Console.WriteLine("Schedule List Is Full...");
+                return;
+            }
+            Console.Write("Enter subject: ");
+            string subject = Console.ReadLine();
 
-    static void InputSchedule()
-    {
-        while (true)
-        {
-            Console.Write("Enter day (Example: Monday), or type 'exit' to finish: ");
+            Console.Write($"Day for {subject} (Example: Monday): ");
             string day = Console.ReadLine();
-            if (day.ToLower() == "exit") break;
 
-            Console.Write($"Enter start time for {day} (Example: 7): ");
-            int startTime = Convert.ToInt32(Console.ReadLine());
+            Console.Write($"Start Time (Example: 13:30): ");
+            string startTime = Console.ReadLine();
 
-            Console.Write($"Enter end time for {day} (Example: 12): ");
-            int endTime = Convert.ToInt32(Console.ReadLine());
+            Console.Write($"End Time (Example: 7:00): ");
+            string endTime = Console.ReadLine();
 
-            Console.WriteLine($"\nSchedule for {day}: {startTime}:00 - {endTime}:00\n");
+            schedules[scheduleCount] = new SubjectSchedule
+            {
+                Subject = subject,
+                Day = day,
+                StartTime = startTime,
+                EndTime = endTime
+            };
+            scheduleCount++;
+
+            Console.WriteLine($"Added {subject} schedule successfully!!!");
+        }
+
+        static void showSchedules()
+        {
+            if (scheduleCount == 0)
+            {
+                Console.WriteLine("No Schedule yet...");
+            }
+            for (int i = 0; i < scheduleCount; i++)
+            {
+                var schedule = schedules[i];
+                Console.WriteLine($"{i + 1}. {schedule.Subject} -  {schedule.Day}, {schedule.StartTime} - {schedule.EndTime}");
+            }
         }
     }
-    }
+}

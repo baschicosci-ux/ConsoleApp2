@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\subjectSchedule\subjectSchedule.csproj" />
+    <ProjectReference Include="..\subSchedDL\subSchedDL.csproj" />
+  </ItemGroup>
+
 </Project>
